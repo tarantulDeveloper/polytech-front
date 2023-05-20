@@ -1,0 +1,17 @@
+.custom-carousel {
+    height: 82vh;
+}
+
+@media (max-width: 1200px) {
+    .custom-carousel {
+        height: 60vh;
+    }
+}
+
+/* Smaller height for smaller screens */
+@media (max-width: 768px) {
+    .custom-carousel {
+        height: 50vh;
+    }
+}
+
