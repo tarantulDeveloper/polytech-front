@@ -1,8 +1,10 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+import './Header.scss';
 
 const Header = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg ">
             <div className="container-fluid">
                 <a className="navbar-brand text-uppercase fw-bold" href="#">LOVZ.KG</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -10,10 +12,10 @@ const Header = () => {
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                <div className="collapse navbar-collapse text-center" id="navbarNavDropdown">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Главная</a>
+                            <NavLink className="nav-link" to="/">Главная</NavLink>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="rehabilitationСenter" role="button"
@@ -44,7 +46,7 @@ const Header = () => {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link"  href="#">Контакты</a>
+                            <NavLink to="/contact" className="nav-link"  href="#">Контакты</NavLink>
                         </li>
                     </ul>
                 </div>

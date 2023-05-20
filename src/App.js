@@ -1,13 +1,15 @@
-import logo from './logo.svg';
-import {Fragment} from "react";
-import Header from "./components/header/Header";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import HomePage from "./Pages/home/HomePage";
+import ContactPage from "./Pages/contact/ContactPage";
 
 function App() {
     return (
-        <Fragment>
-            <Header/>
-            <h1>Hello, world!</h1>
-        </Fragment>
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<HomePage/>} />
+                <Route path="contact" element={<ContactPage />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
