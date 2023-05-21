@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/header/Header";
 import Slider from "../../components/slider/Slider";
+import AboutUs from "../../components/about-us/AboutUs";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Header/>
       <div className="container">
         <Slider/>
+          <AboutUs />
         <div className="row mt-4">
           <div className="col-sm-12 col-md-6 d-flex justify-content-center align-items-center">
             <div>
