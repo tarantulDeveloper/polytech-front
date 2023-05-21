@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/header/Header";
 import Slider from "../../components/slider/Slider";
 import AboutUs from "../../components/about-us/AboutUs";
+import News from "../../components/news/News";
 
 const HomePage = () => {
   return (
@@ -25,6 +26,16 @@ const HomePage = () => {
             />
           </div>
         </div>
+
+        {/* Отдел новостей */}
+        <div className='row bg-primary text-white d-flex align-items-stretch text-center p-2 mt-4'>
+        <h2 className='mb-3'>Новости</h2>
+          <News/>
+          <News/>
+          <News/>
+          <News/>
+        </div>
+        <div className="d-flex justify-content-center my-3"><button type="button" class="btn btn-outline-primary">Все новости</button></div>
       </div>
     </>
   );
