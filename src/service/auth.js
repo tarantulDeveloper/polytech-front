@@ -3,7 +3,7 @@ const REFRESH_TOKEN_NAME = "refreshToken";
 
 
 function login(username, password) {
-  return api.post("/login", { username, password });
+  return api.post("/auth/login", { username, password });
   //return Promise.resolve(fakeLoginResponse);
 }
 

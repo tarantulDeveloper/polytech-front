@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import AuthService from "../service/auth";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch } from "react-redux";
-import { setUserInfo } from "../service/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuth, setUserInfo}) => {
   const [loginRequest, setLoginRequest] = useState({
     username: "",
-    password: ""
-  
+    password: "",
   });
 
-  const dispatch = useDispatch();
-
   const [show, setShow] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,8 +21,6 @@ const LoginPage = () => {
     setLoginRequest({ ...loginRequest, [e.target.name]: value });
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthService.login(loginRequest.username, loginRequest.password)
@@ -32,10 +28,20 @@ const LoginPage = () => {
         if (res.data.accessToken && res.data.refreshToken) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          dispatch(setUserInfo(res.data))
+          localStorage.setItem("refreshToken", res.data.refreshToken);
+          sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
+          sessionStorage.setItem("isAuth", true);
+          setIsAuth(true);
+          setUserInfo(res.data.userInfo);
         }
+        navigate("/");
       })
-      .catch((e) => handleShow())
+      .catch((e) => {
+        handleShow();
+        sessionStorage.clear();
+        setIsAuth(false);
+        setUserInfo(null);
+      })
       .finally(
         setLoginRequest({
           username: "",

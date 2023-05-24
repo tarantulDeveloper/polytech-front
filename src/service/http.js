@@ -1,5 +1,5 @@
 import axios from "axios";
-export const API_URL = `http://localhost:8080/api/auth`;
+export const API_URL = `http://localhost:8080/api`;
 
 const ACCESS_TOKEN_NAME = "accessToken";
 const REFRESH_TOKEN_NAME = "refreshToken";
@@ -23,14 +23,14 @@ const $api = axios.create({
     async (error) => {
       const originalRequest = error.config;
       if (
-        error.response.status == 401 &&
+        error.response.status === 401 &&
         error.config &&
         !error.config._isRetry
       ) {
         originalRequest._isRetry = true;
         try {
           const response = (await axios.post)(
-            `${API_URL}/api/refresh-token`,
+            `${API_URL}/auth/refresh-token`,
             {
               withCredentials: true,
             },

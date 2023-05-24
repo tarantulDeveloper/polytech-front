@@ -1,10 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
-import { useSelector } from "react-redux";
 
-const Header = () => {
-  const {userInfo} = useSelector((state) => state.user)
+const Header = ({ userInfo, isAuth }) => {
   return (
     <nav className="navbar navbar-expand-md ">
       <div className="container-fluid">
@@ -123,22 +121,27 @@ const Header = () => {
                 </li>
               </ul>
             </li>
-            
+
             <li className="nav-item">
               <NavLink to="/contact" className="nav-link" href="#">
                 Контакты
               </NavLink>
             </li>
-            <li>
-              {userInfo.firstName}
-            </li>
-            <li className="nav-item ms-md-auto">
-              <NavLink to="/login" className="nav-link " >
-                Login
-              </NavLink>
-            </li>
+            <ul className="navbar-nav ms-md-auto">
+              {!isAuth && (
+                <li className="nav-item">
+                  <NavLink to="/login" className="nav-link ">
+                    Login
+                  </NavLink>
+                </li>
+              )}
+              {userInfo && (
+                <li className="nav-item">
+                  <NavLink to="/profile" className="nav-link">{userInfo.username}</NavLink>
+                </li>
+              )}
+            </ul>
           </ul>
-          
         </div>
       </div>
     </nav>

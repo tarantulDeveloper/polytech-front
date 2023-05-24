@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/header/Header'
 
-const Layout = ({children}) => {
+const Layout = ({children, isAuth, userInfo}) => {
+    
   return (
+    
+
+    
     <div>
-        <Header />
+        <Header isAuth={isAuth} userInfo={userInfo}/>
         {children}
     </div>
   )
