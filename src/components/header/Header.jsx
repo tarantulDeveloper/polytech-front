@@ -4,7 +4,7 @@ import "./Header.scss";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-md ">
       <div className="container-fluid">
         <a className="navbar-brand text-uppercase fw-bold" href="#">
           LOVZ.KG
@@ -21,10 +21,10 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className="collapse navbar-collapse text-center"
+          className="collapse navbar-collapse text-center w-100"
           id="navbarNavDropdown"
         >
-          <ul className="navbar-nav">
+          <ul className="navbar-nav w-100 d-flex">
             <li className="nav-item">
               <NavLink className="nav-link" to="/">
                 Главная
@@ -126,7 +126,13 @@ const Header = () => {
                 Контакты
               </NavLink>
             </li>
+            <li className="nav-item ms-md-auto">
+              <NavLink to="/login" className="nav-link " >
+                Login
+              </NavLink>
+            </li>
           </ul>
+          
         </div>
       </div>
     </nav>
