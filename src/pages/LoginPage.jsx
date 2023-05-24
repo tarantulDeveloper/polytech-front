@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import AuthService from "../service/auth";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../service/userSlice";
 
 const LoginPage = () => {
   const [loginRequest, setLoginRequest] = useState({
     username: "",
-    password: "",
+    password: ""
+  
   });
+
+  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
 
@@ -18,6 +23,8 @@ const LoginPage = () => {
     setLoginRequest({ ...loginRequest, [e.target.name]: value });
   };
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthService.login(loginRequest.username, loginRequest.password)
@@ -25,7 +32,7 @@ const LoginPage = () => {
         if (res.data.accessToken && res.data.refreshToken) {
           localStorage.setItem("accessToken", res.data.accessToken);
           localStorage.setItem("refreshToken", res.data.refreshToken);
-          console.log(res.data);
+          dispatch(setUserInfo(res.data))
         }
       })
       .catch((e) => handleShow())
