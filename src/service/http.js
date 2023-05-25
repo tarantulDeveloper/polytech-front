@@ -29,19 +29,19 @@ const $api = axios.create({
       ) {
         originalRequest._isRetry = true;
         try {
-          const response = (await axios.post)(
+          const response = await $api.post(
             `${API_URL}/auth/refresh-token`,
-            {
-              withCredentials: true,
-            },
             {
               refreshToken: localStorage.getItem(REFRESH_TOKEN_NAME),
             }
           );
+          console.log(response)
           localStorage.setItem(ACCESS_TOKEN_NAME, response.data.accessToken);
           localStorage.setItem(REFRESH_TOKEN_NAME, response.data.refreshToken);
           return $api.request(originalRequest);
         } catch (e) {
+          localStorage.clear();
+          sessionStorage.clear();
           console.log("НЕ АВТОРИЗОВАН");
         }
       }

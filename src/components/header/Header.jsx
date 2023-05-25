@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import "./Header.scss";
 
 const Header = ({ userInfo, isAuth }) => {
+  const handleRedirect = () => {
+    window.open('http://localhost:3001', '_blank');
+  };
   return (
     <nav className="navbar navbar-expand-md ">
       <div className="container-fluid">
@@ -127,6 +130,7 @@ const Header = ({ userInfo, isAuth }) => {
                 Контакты
               </NavLink>
             </li>
+            
             <ul className="navbar-nav ms-md-auto">
               {!isAuth && (
                 <li className="nav-item">
@@ -137,7 +141,9 @@ const Header = ({ userInfo, isAuth }) => {
               )}
               {userInfo && (
                 <li className="nav-item">
-                  <NavLink to="/profile" className="nav-link">{userInfo.username}</NavLink>
+                  <button className="btn btn-success" onClick={handleRedirect}>
+                    Админ Панель
+                  </button>
                 </li>
               )}
             </ul>
