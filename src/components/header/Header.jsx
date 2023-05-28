@@ -1,13 +1,28 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.scss";
+import ClinicWork from "../../service/clinic_work";
+const Header = ({ userInfo, isAuth, setFontSize }) => {
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    getAllServices();
+  }, []);
 
-const Header = ({ userInfo, isAuth }) => {
-  const handleRedirect = () => {
-    window.open('http://localhost:3001', '_blank');
+  const navigate = useNavigate();
+
+  const getAllServices = () => {
+    ClinicWork.getAllServices()
+      .then((res) => setServices(res.data))
+      .catch((e) => console.log(e));
+  };
+
+  const goToServicePage = (id) => {
+    navigate(`/service/${id}`);
   };
   return (
     <nav className="navbar navbar-expand-md ">
+      <button onClick={() => setFontSize(prev => prev + 1)}>+</button>
+      <button onClick={() => setFontSize(prev => prev- 1)}>-</button>
       <div className="container-fluid">
         <a className="navbar-brand text-uppercase fw-bold" href="#">
           LOVZ.KG
@@ -49,34 +64,47 @@ const Header = ({ userInfo, isAuth }) => {
                 aria-labelledby="rehabilitationСenter"
               >
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink to="/rehabilitation/Бишкек" className="nav-link">
+                    Бишкек
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/rehabilitation/Ош" className="nav-link">
                     Ош
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Талас
-                  </a>
+                  <NavLink to="/rehabilitation/Чуй" className="nav-link">
+                    Чуй
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Джалал-Абад
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Нарын
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink to="/rehabilitation/Иссык-Куль" className="nav-link">
                     Иссык-Куль
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink to="/rehabilitation/Нарын" className="nav-link">
+                    Нарын
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/rehabilitation/Талас" className="nav-link">
+                    Талас
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/rehabilitation/Баткен" className="nav-link">
                     Баткен
-                  </a>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/rehabilitation/Джалал-Абад"
+                    className="nav-link"
+                  >
+                    Джалал-Абад
+                  </NavLink>
                 </li>
               </ul>
             </li>
@@ -92,7 +120,20 @@ const Header = ({ userInfo, isAuth }) => {
                 Услуги
               </a>
               <ul className="dropdown-menu" aria-labelledby="services">
-                <li>
+                {services.length !== 0 && (
+                  <div>
+                    {services.map((service) => (
+                      <li
+                        key={service.id}
+                        className="dropdown-item"
+                        onClick={() => goToServicePage(service.id)}
+                      >
+                        <NavLink className="nav-link">{service.name}</NavLink>
+                      </li>
+                    ))}
+                  </div>
+                )}
+                {/* <li>
                   <a className="dropdown-item" href="#">
                     Социальная помощь
                   </a>
@@ -121,7 +162,7 @@ const Header = ({ userInfo, isAuth }) => {
                   <a className="dropdown-item" href="#">
                     Эрготерапия
                   </a>
-                </li>
+                </li> */}
               </ul>
             </li>
 
@@ -130,7 +171,49 @@ const Header = ({ userInfo, isAuth }) => {
                 Контакты
               </NavLink>
             </li>
-            
+
+            {isAuth && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="cms"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Контент
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="cms">
+                  <li>
+                    <NavLink to="/admin-home-content" className="nav-link">
+                      Home Content
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about-us" className="nav-link">
+                      О нас
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/carousel" className="nav-link">
+                      Карусель
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/clinics" className="nav-link">
+                      Клиники
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/admin/service" className="nav-link">
+                      Услуги
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
+
             <ul className="navbar-nav ms-md-auto">
               {!isAuth && (
                 <li className="nav-item">
@@ -141,9 +224,9 @@ const Header = ({ userInfo, isAuth }) => {
               )}
               {userInfo && (
                 <li className="nav-item">
-                  <button className="btn btn-success" onClick={handleRedirect}>
-                    Админ Панель
-                  </button>
+                  <NavLink to="/login" className="nav-link ">
+                    {userInfo.username}
+                  </NavLink>
                 </li>
               )}
             </ul>

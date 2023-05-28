@@ -3,7 +3,7 @@ import AuthService from "../service/auth";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({setIsAuth, setUserInfo}) => {
+const LoginPage = () => {
   const [loginRequest, setLoginRequest] = useState({
     username: "",
     password: "",
@@ -31,16 +31,14 @@ const LoginPage = ({setIsAuth, setUserInfo}) => {
           localStorage.setItem("refreshToken", res.data.refreshToken);
           sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
           sessionStorage.setItem("isAuth", true);
-          setIsAuth(true);
-          setUserInfo(res.data.userInfo);
         }
-        navigate("/");
+        window.location.reload();
+        window.location.href="/";
       })
       .catch((e) => {
         handleShow();
         sessionStorage.clear();
-        setIsAuth(false);
-        setUserInfo(null);
+        localStorage.clear();
       })
       .finally(
         setLoginRequest({

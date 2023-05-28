@@ -1,17 +1,24 @@
+.stretch-vertical {
+  height: 100%;
+}
+
+.stretch-horizontal {
+  width: 100%;
+}
+
 .custom-carousel {
-    height: 82vh;
+  height: 90vh;
 }
 
 @media (max-width: 1200px) {
-    .custom-carousel {
-        height: 60vh;
-    }
+  .custom-carousel {
+    height: 60vh;
+  }
 }
 
 /* Smaller height for smaller screens */
 @media (max-width: 768px) {
-    .custom-carousel {
-        height: 50vh;
-    }
+  .custom-carousel {
+    height: 50vh;
+  }
 }
-

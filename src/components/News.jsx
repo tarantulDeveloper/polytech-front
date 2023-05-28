@@ -5,7 +5,7 @@ const News = () => {
     console.log("I'm going to the news page");
   };
   return (
-    <div className="col-sm-12 col-md-4 col-lg-3" onClick={goToNewsPage}>
+    <div className="col-sm-12 col-md-4" onClick={goToNewsPage}>
       <div className="d-flex flex-column text-center">
         <img
           src="https://i.pinimg.com/736x/41/f1/86/41f1865ffaba642d7feba2243c215817.jpg"

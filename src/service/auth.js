@@ -1,4 +1,5 @@
 import api from "./http";
+
 const REFRESH_TOKEN_NAME = "refreshToken";
 
 
@@ -17,5 +18,6 @@ function refreshToken() {
 function register(name, username, password) {
   return api.post("/api/register", { name, username, password });
 }
+
 
 export default { login, register, refreshToken };
