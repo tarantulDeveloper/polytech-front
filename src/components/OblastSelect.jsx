@@ -13,7 +13,8 @@ const OblastSelect = ({ selectedValue, handleSelectChange }) => {
       >
         <option value="Бишкек">Бишкек</option>
         <option value="Чуй">Чуй</option>
-        <option value="Oш">Ош</option>
+        <option value="Ош_город">город Ош</option>
+        <option value="Ош_обл">Ошская область</option>
         <option value="Иссык-Куль">Иссык-Куль</option>
         <option value="Нарын">Нарын</option>
         <option value="Талас">Талас</option>

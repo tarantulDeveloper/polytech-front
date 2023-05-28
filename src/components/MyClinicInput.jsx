@@ -29,6 +29,7 @@ const MyClinicInput = ({
     workDays: false,
     address: false,
     photoUrl: false,
+    webSiteUrl: false,
   });
   const checkMe = (e) => {
     if (e.target.value === "") {
@@ -81,9 +82,7 @@ const MyClinicInput = ({
               <label htmlFor="phone" className="form-label">
                 Контактный номер:
               </label>
-              {errors.phone && (
-                <p className="text-danger">Заполните Номер!</p>
-              )}
+              {errors.phone && <p className="text-danger">Заполните Номер!</p>}
               <input
                 onChange={handleTextChange}
                 type="text"
@@ -122,9 +121,29 @@ const MyClinicInput = ({
                 name="workTime"
                 id="workTime"
                 onBlur={checkMe}
-                className={`form-control ${errors.workTime ? "is-invalid" : ""}`}
+                className={`form-control ${
+                  errors.workTime ? "is-invalid" : ""
+                }`}
                 value={content.workTime}
                 required
+              />
+              <label htmlFor="webSiteUrl" className="form-label">
+                Веб сайт:
+              </label>
+              {errors.webSiteUrl && (
+                <p className="text-danger">Заполните Веб сайт url!</p>
+              )}
+              <input
+                onChange={handleTextChange}
+                type="text"
+                name="webSiteUrl"
+                id="webSiteUrl"
+                onBlur={checkMe}
+                className={`form-control ${
+                  errors.webSiteUrl ? "is-invalid" : ""
+                }`}
+                required
+                value={content.webSiteUrl}
               />
               <ServiceList
                 selectedServices={selectedServices}
@@ -152,7 +171,9 @@ const MyClinicInput = ({
                 name="photoAltText"
                 id="photoAltText"
                 onBlur={checkMe}
-                className={`form-control ${errors.photoAltText ? "is-invalid" : ""}`}
+                className={`form-control ${
+                  errors.photoAltText ? "is-invalid" : ""
+                }`}
                 value={content.photoAltText}
                 required
               />

@@ -51,6 +51,7 @@ const ClinicClientDetailedPage = () => {
             <h6>Время работы: {clinic.workTime}</h6>
             <h6>Дни работы: {clinic.workDays}</h6>
             <h6>Адрес: {clinic.address}</h6>
+            <h6>Веб-сайт: <a href={clinic.webSiteUrl} target="_blank">{clinic.webSiteUrl}</a></h6>
           </div>
           <div className="row">
             <h6>Услуги: </h6>

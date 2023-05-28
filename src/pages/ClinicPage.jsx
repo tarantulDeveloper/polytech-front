@@ -16,6 +16,7 @@ const ClinicPage = () => {
     workDays: "",
     address: "",
     photo: null,
+    webSiteUrl: ""
   });
   const [clinics, setClinics] = useState([]);
   const [selectedWeekdays, setSelectedWeekdays] = useState([]);
@@ -54,6 +55,7 @@ const ClinicPage = () => {
     data.append("workTime", newClinic.workTime);
     data.append("oblast", selectedValue);
     data.append("address", newClinic.address);
+    data.append("webSiteUrl", newClinic.webSiteUrl);
     data.append("workDays", selectedWeekdays.join(", "));
     data.append("photo", newClinic.photo);
     setLoading(true);

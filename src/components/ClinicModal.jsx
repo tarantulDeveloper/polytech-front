@@ -26,6 +26,7 @@ const ClinicModal = ({
     address: false,
     photoUrl: false,
     photo: false,
+    webSiteUrl: false,
   });
   const checkMe = (e) => {
     if (e.target.value === "") {
@@ -104,6 +105,19 @@ const ClinicModal = ({
             id="workTime"
             onBlur={checkMe}
             className={`form-control ${errors.workTime ? "is-invalid" : ""}`}
+            required
+          />
+          <label htmlFor="webSiteUrl" className="form-label">
+            Веб сайт:
+          </label>
+          {errors.webSiteUrl && <p className="text-danger">Заполните Веб сайт url!</p>}
+          <input
+            onChange={handleTextChange}
+            type="text"
+            name="webSiteUrl"
+            id="webSiteUrl"
+            onBlur={checkMe}
+            className={`form-control ${errors.webSiteUrl ? "is-invalid" : ""}`}
             required
           />
           <OblastSelect

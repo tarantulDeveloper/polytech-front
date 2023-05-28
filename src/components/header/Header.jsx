@@ -87,44 +87,49 @@ const Header = ({
                 aria-labelledby="rehabilitationСenter"
               >
                 <li>
-                  <NavLink to="/rehabilitation/Бишкек" className="nav-link">
+                  <NavLink to="/rehabilitation/Бишкек" className="nav-link text-danger">
                     Бишкек
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Ош" className="nav-link">
-                    Ош
+                  <NavLink to="/rehabilitation/Ош_город" className="nav-link text-danger">
+                    город Ош
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Чуй" className="nav-link">
+                  <NavLink to="/rehabilitation/Ош_обл" className="nav-link text-danger">
+                    Ошская область
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/rehabilitation/Чуй" className="nav-link text-danger">
                     Чуй
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Иссык-Куль" className="nav-link">
+                  <NavLink to="/rehabilitation/Иссык-Куль" className="nav-link text-danger">
                     Иссык-Куль
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Нарын" className="nav-link">
+                  <NavLink to="/rehabilitation/Нарын" className="nav-link text-danger">
                     Нарын
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Талас" className="nav-link">
+                  <NavLink to="/rehabilitation/Талас" className="nav-link text-danger">
                     Талас
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/rehabilitation/Баткен" className="nav-link">
+                  <NavLink to="/rehabilitation/Баткен" className="nav-link text-danger">
                     Баткен
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
                     to="/rehabilitation/Джалал-Абад"
-                    className="nav-link"
+                    className="nav-link text-danger"
                   >
                     Джалал-Абад
                   </NavLink>
@@ -151,7 +156,7 @@ const Header = ({
                         className="dropdown-item"
                         onClick={() => goToServicePage(service.id)}
                       >
-                        <NavLink className="nav-link">{service.name}</NavLink>
+                        <NavLink className="nav-link text-danger">{service.name}</NavLink>
                       </li>
                     ))}
                   </div>
@@ -209,38 +214,43 @@ const Header = ({
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="cms">
                   <li>
-                    <NavLink to="/admin-home-content" className="nav-link">
+                    <NavLink to="/admin-home-content" className="nav-link text-danger">
                       Home Content
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/about-us" className="nav-link">
+                    <NavLink to="/about-us" className="nav-link text-danger">
                       О нас
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/carousel" className="nav-link">
+                    <NavLink to="/carousel" className="nav-link text-danger">
                       Карусель
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/clinics" className="nav-link">
+                    <NavLink to="/clinics" className="nav-link text-danger">
                       Клиники
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/admin/service" className="nav-link">
+                    <NavLink to="/admin/service" className="nav-link text-danger">
                       Услуги
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/news-admin" className="nav-link">
+                    <NavLink to="/news-admin" className="nav-link text-danger">
                       Новости
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/appeals" className="nav-link">
+                    <NavLink to="/appeals" className="nav-link text-danger">
                       Сообщения
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/admin-list" className="nav-link text-danger">
+                      Админы
                     </NavLink>
                   </li>
                 </ul>
@@ -266,7 +276,7 @@ const Header = ({
               )}
               {userInfo && (
                 <li className="nav-item">
-                  <NavLink to="/login" className="nav-link ">
+                  <NavLink to="/admin-page" className="nav-link ">
                     {userInfo.username}
                   </NavLink>
                 </li>

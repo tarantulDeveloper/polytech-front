@@ -1,5 +1,5 @@
 import axios from "axios";
-export const API_URL = `http://localhost:8080/api`;
+export const API_URL = `http://34.65.179.105:8080/api`;
 
 
 const ACCESS_TOKEN_NAME = "accessToken";

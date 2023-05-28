@@ -69,6 +69,7 @@ const ContactPage = () => {
           </button>
         </Modal.Footer>
       </Modal>
+      <h2 className="my-3">Оставить сообщение админимстраторам сайта</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" className="form-label">
           Имя

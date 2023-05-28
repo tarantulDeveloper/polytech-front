@@ -27,6 +27,7 @@ import NewsUpdatePage from "./pages/NewsUpdatePage";
 import NewsDetailedPage from "./pages/NewsDetailedPage";
 import AllNewsPage from "./pages/AllNewsPage";
 import AppealPage from "./pages/AppealPage";
+import AdminsPage from "./pages/AdminsPage";
 
 
 function App() {
@@ -68,16 +69,25 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage setIsAuth={setIsAuth} setUserInfo={setUserInfo} />} />
-          <Route path="/admin" element={<AdminPage />} />
           <Route path="/rehabilitation/:oblast" element={<ClinicClientPage />} />
           <Route path="/rehabilitation/detailed/:id" element={<ClinicClientDetailedPage />} />
           <Route path="/service/:id" element={<ClientServicePage />} />
           <Route path="/feedback/:id" element={<CreateFeedbackPage />} />
           <Route path="/news" element={<AllNewsPage />} />
           <Route path="/news-detailed" element={<NewsDetailedPage />} />
-          <Route path="admin-home-content" element={
+          <Route path="/admin-home-content" element={
             <RequireAuth isAuth={isAuth}>
               <AdminHomeContentPage />
+            </RequireAuth>
+          } />
+          <Route path="/admin-page" element={
+            <RequireAuth isAuth={isAuth}>
+              <AdminPage />
+            </RequireAuth>
+          } />
+          <Route path="/admin-list" element={
+            <RequireAuth isAuth={isAuth}>
+              <AdminsPage />
             </RequireAuth>
           } />
           <Route path="/admin-home-content-update/:id" element={

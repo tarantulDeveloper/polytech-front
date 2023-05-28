@@ -18,6 +18,7 @@ const ClinicUpdatePage = () => {
     address: "",
     photo: null,
     photoUrl: "",
+    webSiteUrl: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -105,6 +106,7 @@ const ClinicUpdatePage = () => {
     data.append("workTime", clinic.workTime);
     data.append("oblast", selectedValue);
     data.append("address", clinic.address);
+    data.append("webSiteUrl", clinic.webSiteUrl);
     data.append("workDays", selectedWeekdays.join(", "));
 
     const tempArray = [];

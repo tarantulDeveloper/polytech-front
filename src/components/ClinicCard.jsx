@@ -38,6 +38,7 @@ const ClinicCard = ({ clinic }) => {
         <p>
           Адрес: <i>{clinic.address}</i>
         </p>
+        <p>Веб сайт: <a href={clinic.webSiteUrl} target="_blank">{clinic.webSiteUrl}</a></p>
         <p>
           Контактный номер: <b>{clinic.phone}</b>
         </p>
