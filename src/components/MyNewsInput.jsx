@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Loader from "./Loader";
 
-const MyInput = ({
+const MyNewsInput = ({
   isLoading,
   content,
   handleTextChange,
@@ -13,6 +13,7 @@ const MyInput = ({
     header: false,
     text: false,
     photoAltText: false,
+    mainText: false
   });
 
   const checkMe = (e) => {
@@ -47,9 +48,11 @@ const MyInput = ({
                 value={content.header}
               />
               <label htmlFor="text" className="form-label">
-                Текст:
+                Подзаглавие:
               </label>
-              {errors.text && <p className="text-danger">Заполните Текст!</p>}
+              {errors.text && (
+                <p className="text-danger">Заполните Подзаглавие!</p>
+              )}
               <textarea
                 onChange={handleTextChange}
                 type="text"
@@ -59,6 +62,22 @@ const MyInput = ({
                 className={`form-control ${errors.text ? "is-invalid" : ""}`}
                 required
                 value={content.text}
+              />
+              <label htmlFor="mainText" className="form-label">
+                Основной текст:
+              </label>
+              {errors.mainText && (
+                <p className="text-danger">Заполните Основной Текст!</p>
+              )}
+              <textarea
+                onChange={handleTextChange}
+                type="text"
+                name="mainText"
+                id="mainText"
+                onBlur={checkMe}
+                className={`form-control ${errors.text ? "is-invalid" : ""}`}
+                required
+                value={content.mainText}
               />
               <label htmlFor="photoAltText" className="form-label">
                 Альт-й текст картинки:
@@ -71,7 +90,6 @@ const MyInput = ({
                 type="text"
                 name="photoAltText"
                 id="photoAltText"
-                onBlur={checkMe}
                 className={`form-control ${
                   errors.photoAltText ? "is-invalid" : ""
                 }`}
@@ -116,4 +134,4 @@ const MyInput = ({
   );
 };
 
-export default MyInput;
+export default MyNewsInput;

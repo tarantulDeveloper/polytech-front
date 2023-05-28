@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const MyModal = ({
+const MyNewsModal = ({
   showModal,
   handleCloseModal,
   entity,
@@ -14,6 +14,7 @@ const MyModal = ({
     text: false,
     photoAltText: false,
     photo: false,
+    mainText: false
   });
 
   const checkMe = (e) => {
@@ -23,7 +24,6 @@ const MyModal = ({
       setErrors({ ...errors, [e.target.name]: false });
     }
   };
-
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
@@ -45,9 +45,9 @@ const MyModal = ({
             required
           />
           <label htmlFor="text" className="form-label">
-            Текст:
+            Подзаглавие:
           </label>
-          {errors.text && <p className="text-danger">Заполните Текст!</p>}
+          {errors.text && <p className="text-danger">Заполните Подзаглавие!</p>}
           <textarea
             onChange={handleTextChange}
             type="text"
@@ -55,6 +55,19 @@ const MyModal = ({
             id="text"
             onBlur={checkMe}
             className={`form-control ${errors.text ? "is-invalid" : ""}`}
+            required
+          />
+          <label htmlFor="mainText" className="form-label">
+            Основной текст:
+          </label>
+          {errors.mainText && <p className="text-danger">Заполните Основной Текст!</p>}
+          <textarea
+            onChange={handleTextChange}
+            type="text"
+            name="mainText"
+            id="mainText"
+            onBlur={checkMe}
+            className={`form-control ${errors.mainText ? "is-invalid" : ""}`}
             required
           />
           <label htmlFor="photoAltText" className="form-label">
@@ -98,7 +111,7 @@ const MyModal = ({
         </form>
       </Modal.Body>
     </Modal>
-  );
+  )
 };
 
-export default MyModal;
+export default MyNewsModal;

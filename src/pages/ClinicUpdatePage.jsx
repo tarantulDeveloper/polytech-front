@@ -96,7 +96,7 @@ const ClinicUpdatePage = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+
     const data = new FormData();
     data.append("header", clinic.header);
     data.append("text", clinic.text);
@@ -114,7 +114,7 @@ const ClinicUpdatePage = () => {
     };
 
     data.append("worksIds", tempArray)
-    console.log(tempArray)
+   
     if (typeof clinic.photo !== "undefined") {
       data.append("photo", clinic.photo);
     }

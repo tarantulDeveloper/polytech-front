@@ -2,11 +2,35 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import ClinicWork from "../../service/clinic_work";
-const Header = ({ userInfo, isAuth, setFontSize }) => {
+import { Modal, Button } from "react-bootstrap";
+
+const Header = ({
+  userInfo,
+  isAuth,
+  handleFontSizeClick,
+  handleColorChange,
+  backgroundColor
+}) => {
   const [services, setServices] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   useEffect(() => {
     getAllServices();
   }, []);
+
+  const handleReset = () => {
+    handleFontSizeClick(16);
+    handleColorChange("white");
+    sessionStorage.removeItem("color");
+    sessionStorage.removeItem("fontSize");
+    sessionStorage.removeItem("background");
+    handleCloseModal();
+  };
 
   const navigate = useNavigate();
 
@@ -20,9 +44,8 @@ const Header = ({ userInfo, isAuth, setFontSize }) => {
     navigate(`/service/${id}`);
   };
   return (
-    <nav className="navbar navbar-expand-md ">
-      <button onClick={() => setFontSize(prev => prev + 1)}>+</button>
-      <button onClick={() => setFontSize(prev => prev- 1)}>-</button>
+    <nav className={`navbar navbar-expand-md 
+    ${backgroundColor === 'blue' || backgroundColor === 'black' ? 'navbar-dark':'navbar-light'}`}>
       <div className="container-fluid">
         <a className="navbar-brand text-uppercase fw-bold" href="#">
           LOVZ.KG
@@ -57,7 +80,7 @@ const Header = ({ userInfo, isAuth, setFontSize }) => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Реабилитационные центры
+                Клиники
               </a>
               <ul
                 className="dropdown-menu"
@@ -210,11 +233,30 @@ const Header = ({ userInfo, isAuth, setFontSize }) => {
                       Услуги
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/news-admin" className="nav-link">
+                      Новости
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/appeals" className="nav-link">
+                      Сообщения
+                    </NavLink>
+                  </li>
                 </ul>
               </li>
             )}
 
             <ul className="navbar-nav ms-md-auto">
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleShowModal}
+                >
+                  Версия для слабовидящих
+                </button>
+              </li>
               {!isAuth && (
                 <li className="nav-item">
                   <NavLink to="/login" className="nav-link ">
@@ -233,6 +275,85 @@ const Header = ({ userInfo, isAuth, setFontSize }) => {
           </ul>
         </div>
       </div>
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Версия для слабовидящих</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex my-5 justify-content-around">
+            <div>
+              <p>Размер шрифта</p>
+              <p className="d-flex justify-content-between align-items-center h-100">
+                <span
+                  tabIndex={1}
+                  style={{ fontSize: "20px" }}
+                  className="border border-1 border-primary"
+                  onClick={() => handleFontSizeClick(20)}
+                >
+                  A
+                </span>
+                <span
+                  tabIndex={2}
+                  style={{ fontSize: "30px" }}
+                  className="border border-1 border-warning"
+                  onClick={() => handleFontSizeClick(25)}
+                >
+                  A
+                </span>
+                <span
+                  tabIndex={3}
+                  style={{ fontSize: "40px" }}
+                  className="border border-1 border-danger"
+                  onClick={() => handleFontSizeClick(30)}
+                >
+                  A
+                </span>
+              </p>
+            </div>
+            <div>
+              <p>Цвет сайта</p>
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <div
+                  style={{ background: "yellow" }}
+                  className="p-2 my-2 text-dark"
+                  onClick={() => {
+                    handleColorChange("yellow");
+                    
+                  }}
+                >
+                  Текст
+                </div>
+                <div
+                  style={{ background: "black" }}
+                  className="p-2 my-2 text-white"
+                  onClick={() => handleColorChange("black")}
+                >
+                  Текст
+                </div>
+                <div
+                  style={{ background: "blue" }}
+                  className="p-2 my-2 text-white"
+                  onClick={() => handleColorChange("blue")}
+                >
+                  Текст
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleReset}>
+            Сбросить
+          </Button>
+          <button
+            type="submit"
+            className="btn btn-success ms-auto me-0"
+            onClick={handleCloseModal}
+          >
+            Применить
+          </button>
+        </Modal.Footer>
+      </Modal>
     </nav>
   );
 };

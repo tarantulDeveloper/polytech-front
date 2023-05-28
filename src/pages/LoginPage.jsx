@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AuthService from "../service/auth";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [loginRequest, setLoginRequest] = useState({
@@ -11,7 +10,19 @@ const LoginPage = () => {
 
   const [show, setShow] = useState(false);
 
-  const navigate = useNavigate();
+  const [errors, setErrors] = useState({
+    username: false,
+    password: false,
+  });
+
+  const checkMe = (e) => {
+    if (e.target.value === "") {
+      setErrors({ ...errors, [e.target.name]: true });
+    } else {
+      setErrors({ ...errors, [e.target.name]: false });
+    }
+  };
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,7 +48,8 @@ const LoginPage = () => {
       })
       .catch((e) => {
         handleShow();
-        sessionStorage.clear();
+        sessionStorage.removeItem("userInfo");
+        sessionStorage.removeItem("isAuth");
         localStorage.clear();
       })
       .finally(
@@ -70,9 +82,12 @@ const LoginPage = () => {
         <label htmlFor="username" className="form-label">
           Username
         </label>
+        {errors.username && <p className="text-danger">Заполните username!</p>}
         <input
           type="text"
-          className="form-control"
+          onBlur={checkMe}
+          className={`form-control ${errors.username ? "is-invalid" : ""}`}
+          required
           id="username"
           aria-describedby="useraneHelp"
           onChange={handleTextChange}
@@ -87,9 +102,12 @@ const LoginPage = () => {
         <label htmlFor="password" className="form-label">
           Password
         </label>
+        {errors.password && <p className="text-danger">Заполните password!</p>}
         <input
           type="password"
-          className="form-control"
+          onBlur={checkMe}
+          className={`form-control ${errors.password ? "is-invalid" : ""}`}
+          required
           id="password"
           name="password"
           value={loginRequest.password}

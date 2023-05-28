@@ -1,22 +1,29 @@
 import React, { Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 
-const News = () => {
+const News = ({newsEntity}) => {
+  const navigate = useNavigate(); 
+
   const goToNewsPage = () => {
-    console.log("I'm going to the news page");
+    const data = newsEntity;
+    
+    navigate("/news-detailed", {state: data})
   };
   return (
-    <div className="col-sm-12 col-md-4" onClick={goToNewsPage}>
+    <div className="col-sm-12 col-md-4 my-2" >
       <div className="d-flex flex-column text-center">
+        <div className="d-flex justify-content-center align-items-center">
         <img
-          src="https://i.pinimg.com/736x/41/f1/86/41f1865ffaba642d7feba2243c215817.jpg"
-          alt="news image"
-          className="img-fluid rounded pointer"
+          src={newsEntity.photoUrl}
+          alt={newsEntity.photoAltText}
+          className=" rounded pointer img-fluid"
         />
-        <h4 className="my-1 pointer">Заголовок новости</h4>
+        </div>
+        <h4 className="my-1 pointer">{newsEntity.header}</h4>
         <p>
-          Здесь будет подзаголовок, а подробнее о самой новости можно будет
-          посмотреть кликнув по ней
+          {newsEntity.text}
         </p>
+        <button type="button" className="btn btn-success mx-5" onClick={() => goToNewsPage(newsEntity)}>Подробнее</button>
       </div>
     </div>
   );

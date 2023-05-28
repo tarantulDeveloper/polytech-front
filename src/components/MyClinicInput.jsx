@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Loader from "./Loader";
 import OblastSelect from "./OblastSelect";
 import WeekDays from "./WeekDays";
@@ -19,6 +19,25 @@ const MyClinicInput = ({
   handleSelectedCheck,
   services,
 }) => {
+  const [errors, setErrors] = useState({
+    header: false,
+    text: false,
+    photoAltText: false,
+    phone: false,
+    workTime: false,
+    oblast: false,
+    workDays: false,
+    address: false,
+    photoUrl: false,
+  });
+  const checkMe = (e) => {
+    if (e.target.value === "") {
+      setErrors({ ...errors, [e.target.name]: true });
+    } else {
+      setErrors({ ...errors, [e.target.name]: false });
+    }
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -26,66 +45,92 @@ const MyClinicInput = ({
           {isLoading ? (
             <Loader />
           ) : (
-            <form className="mb-5">
+            <form className="mb-5" onSubmit={handleSubmit}>
               <label htmlFor="header" className="form-label">
                 Название
               </label>
+              {errors.header && (
+                <p className="text-danger">Заполните Название!</p>
+              )}
               <input
                 onChange={handleTextChange}
+                onBlur={checkMe}
+                className={`form-control ${errors.header ? "is-invalid" : ""}`}
                 type="text"
                 name="header"
                 id="header"
-                className="form-control"
                 value={content.header}
+                required
               />
               <label htmlFor="text" className="form-label">
                 Описание:
               </label>
+              {errors.text && (
+                <p className="text-danger">Заполните Описание!</p>
+              )}
               <textarea
                 onChange={handleTextChange}
                 type="text"
                 name="text"
                 id="text"
-                className="form-control"
+                onBlur={checkMe}
+                className={`form-control ${errors.text ? "is-invalid" : ""}`}
                 value={content.text}
+                required
               />
               <label htmlFor="phone" className="form-label">
                 Контактный номер:
               </label>
+              {errors.phone && (
+                <p className="text-danger">Заполните Номер!</p>
+              )}
               <input
                 onChange={handleTextChange}
                 type="text"
                 name="phone"
                 id="phone"
-                className="form-control"
+                onBlur={checkMe}
+                className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                 value={content.phone}
+                required
               />
               <label htmlFor="address" className="form-label">
                 Адрес:
               </label>
+              {errors.address && (
+                <p className="text-danger">Заполните Адрес!</p>
+              )}
               <input
                 onChange={handleTextChange}
                 type="text"
                 name="address"
                 id="address"
-                className="form-control"
+                onBlur={checkMe}
+                className={`form-control ${errors.address ? "is-invalid" : ""}`}
                 value={content.address}
+                required
               />
               <label htmlFor="workTime" className="form-label">
                 Время работы:
               </label>
+              {errors.workTime && (
+                <p className="text-danger">Заполните Время!</p>
+              )}
               <input
                 onChange={handleTextChange}
                 type="text"
                 name="workTime"
                 id="workTime"
-                className="form-control "
+                onBlur={checkMe}
+                className={`form-control ${errors.workTime ? "is-invalid" : ""}`}
                 value={content.workTime}
+                required
               />
               <ServiceList
                 selectedServices={selectedServices}
                 handleCheckboxChange={handleSelectedCheck}
                 services={services}
+                required
               />
               <OblastSelect
                 selectedValue={selectedValue}
@@ -98,13 +143,18 @@ const MyClinicInput = ({
               <label htmlFor="photoAltText" className="form-label">
                 Альт-й текст картинки:
               </label>
+              {errors.photoAltText && (
+                <p className="text-danger">Заполните Альтернитвное описание!</p>
+              )}
               <input
                 onChange={handleTextChange}
                 type="text"
                 name="photoAltText"
                 id="photoAltText"
-                className="form-control"
+                onBlur={checkMe}
+                className={`form-control ${errors.photoAltText ? "is-invalid" : ""}`}
                 value={content.photoAltText}
+                required
               />
               <div className="container p-5">
                 <img
@@ -126,10 +176,7 @@ const MyClinicInput = ({
                 id="photo"
                 className="form-control"
               />
-              <button
-                className="btn btn-success mt-5 w-100"
-                onClick={handleSubmit}
-              >
+              <button className="btn btn-success mt-5 w-100" type="submit">
                 Изменить
               </button>
               <button

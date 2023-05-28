@@ -37,13 +37,13 @@ $api.interceptors.response.use(
             refreshToken: localStorage.getItem(REFRESH_TOKEN_NAME),
           }
         );
-        console.log(response)
         localStorage.setItem(ACCESS_TOKEN_NAME, response.data.accessToken);
         localStorage.setItem(REFRESH_TOKEN_NAME, response.data.refreshToken);
         return $api.request(originalRequest);
       } catch (e) {
         localStorage.clear();
-        sessionStorage.clear();
+        sessionStorage.removeItem("userInfo")
+        sessionStorage.removeItem("isAuth")
         window.location.reload();
         window.location.href = "/";
       }
